@@ -1,0 +1,42 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: pdb-tester
+  labels:
+    app: pdb-tester
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pdb-tester
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 40%
+  template:
+    metadata:
+      labels:
+        app: pdb-tester
+    spec:
+      containers:
+      - image: "trondhindenes/k8sprobetester:latest"
+        name: pdb-tester
+        env:
+          - name: START_WAIT_SECS
+            value: '15'
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+            httpHeaders:
+              - name: Host
+                value: KubernetesLivenessProbe
+          initialDelaySeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+            httpHeaders:
+              - name: Host
+                value: KubernetesReadinessProbe
+          initialDelaySeconds: 20
