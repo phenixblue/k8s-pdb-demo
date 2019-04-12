@@ -64,7 +64,9 @@ This is a demo to show the configuration and functionality of a Kubernetes PDB (
 
 - Show how a single node drain affects the workload
 
+    ```
     $ kubectl drain <node_name> --ignore-daemonsets --delete-local-data
+    ```
 
     - Watching secondary windows showing the pod recreation and wait for probes
 
