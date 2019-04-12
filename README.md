@@ -17,13 +17,13 @@ This is a demo to show the configuration and functionality of a Kubernetes PDB (
         - Deploy workload
 
             ```
-            $ kubectl apply -f pdb-tester-deploy.yaml
+            $ kubectl apply -f pdb-tester-deploy.yaml -n pdb-test
             ```
 
         - Deploy PDB
 
             ```
-            $ kubectl apply -f pdb-tester-pdb.yaml
+            $ kubectl apply -f pdb-tester-pdb.yaml -n pdb-test
             ```
 
     - 1 for watching the pods
